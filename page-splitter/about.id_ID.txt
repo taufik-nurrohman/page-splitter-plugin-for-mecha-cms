@@ -1,0 +1,60 @@
+Title: Pembagi Halaman
+Author: Taufik Nurrohman
+URL: http://latitudu.com
+Version: 1.0.0
+
+====
+
+> Membagi isi artikel/halaman menjadi potongan-potongan, dan membuatnya dapat dinavigasikan. 
+
+Anda dapat menggunakannya untuk membagi-bagi konten artikel/halaman yang panjang menjadi dua, tiga, empat, atau lebih langkah. Plugin ini juga berguna untuk menangani galeri foto/video/presentasi atau bahkan komik web dengan banyak gambar, sehingga proses memuat sumber daya dapat diantrikan dalam langkah-langkah. 
+
+Tidak dianjurkan untuk halaman-halaman yang hanya berisi teks saja. Ini mungkin hanya akan membuat pengunjung Anda marah-marah.
+
+Anda **tidak bisa** membuat konten artikel/halaman bernavigasi lebih dari satu buah dalam satu buah konten artikel/halaman.
+
+#### Penggunaan
+
+Tambahkan kode komentar HTML ini pada tempat dimana Anda ingin memecahkan alinea halaman:
+
+~~~ .html
+<!-- next -->
+~~~
+
+##### Contoh 1
+
+~~~ .html
+Saya akan menjadi Halaman 1.
+
+<!-- next -->
+
+Saya akan menjadi Halaman 2.
+
+<!-- next -->
+
+Saya akan menjadi Halaman 3.
+~~~
+
+##### Contoh 2
+
+~~~ .html
+Saya tidak akan dinavigasikan.
+
+<!-- begin:steps -->
+
+Saya akan menjadi Halaman 1.
+
+<!-- next -->
+
+Saya akan menjadi Halaman 2.
+
+<!-- next -->
+
+Saya akan menjadi Halaman 3.
+
+<!-- end:steps -->
+
+Saya tidak akan dinavigasikan.
+~~~
+
+*[HTML]: Hyper Text Markup Language

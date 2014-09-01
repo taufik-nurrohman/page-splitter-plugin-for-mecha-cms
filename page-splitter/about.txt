@@ -1,0 +1,60 @@
+Title: Page Splitter
+Author: Taufik Nurrohman
+URL: http://latitudu.com
+Version: 1.0.0
+
+====
+
+> Split an article/page content into chunks, and make it paginate-able.
+
+You can use it to split long article/page content into two, three, four, or more steps. This plugin also useful for handling photo/video/presentation galleries or even web comics with a lot of images, so that the resource loading process can be queued in steps.
+
+Not recommended for text-only pages. It likely will only make your visitors get mad.
+
+You **cannot** make more than one paginated article/page content in a single article/page content.
+
+#### Usage
+
+Add this HTML comment after the paragraph you want to split:
+
+~~~ .html
+<!-- next -->
+~~~
+
+##### Example 1
+
+~~~ .html
+I will become Page 1.
+
+<!-- next -->
+
+I will become Page 2.
+
+<!-- next -->
+
+I will become Page 3.
+~~~
+
+##### Example 2
+
+~~~ .html
+I will not be paginated.
+
+<!-- begin:steps -->
+
+I will become Page 1.
+
+<!-- next -->
+
+I will become Page 2.
+
+<!-- next -->
+
+I will become Page 3.
+
+<!-- end:steps -->
+
+I will not be paginated.
+~~~
+
+*[HTML]: Hyper Text Markup Language
