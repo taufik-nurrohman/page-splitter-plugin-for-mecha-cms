@@ -14,7 +14,7 @@ function do_split_page_content($content) {
     global $config, $speak, $ps_config;
  
     // Do nothing if the minimum required pattern not found in page content
-    if(strpos($content, '<!--') === false) return $content;
+    if(strpos($content, '<!-- next -->') === false) return $content;
 
     // Add a closing pattern if the closing pattern not found
     if(strpos($content, '<!-- end:steps -->') === false) {
