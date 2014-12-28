@@ -15,7 +15,7 @@ You **cannot** make more than one paginated article/page content in a single art
 
 #### Usage
 
-Add this HTML comment after the paragraph you want to split:
+Add this HTML comment between the paragraph you want to split:
 
 ~~~ .html
 <!-- next -->

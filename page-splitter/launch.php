@@ -1,11 +1,11 @@
 <?php
 
 // Load the configuration file
-$ps_config = File::open(PLUGIN . DS . 'page-splitter' . DS . 'states' . DS . 'config.txt')->unserialize();
+$ps_config = File::open(PLUGIN . DS . basename(__DIR__) . DS . 'states' . DS . 'config.txt')->unserialize();
 
 // Include the Page Splitter's CSS
 Weapon::add('shell_after', function() {
-    echo Asset::stylesheet('cabinet/plugins/page-splitter/shell/ps.css');
+    echo Asset::stylesheet('cabinet/plugins/' . basename(__DIR__) . '/shell/ps.css');
 });
 
 // The page splitter function
@@ -40,7 +40,7 @@ function do_split_page_content($content) {
         $pager_next_prev = ( ! empty($pager->prev->link) ? '<a class="ps-pager-prev" href="' . $pager->prev->url . '">' . $speak->prev . '</a>' : '<span class="ps-pager-prev">' . $speak->prev . '</span>') . ( ! empty($pager->next->link) ? '<a class="ps-pager-next" href="' . $pager->next->url . '">' . $speak->next . '</a>' : '<span class="ps-pager-next">' . $speak->next . '</span>');
         $pagination = $ps_config['pagination'] == 'step' ? $pager->step->link : $pager_next_prev;
 
-        // Convert `foo/bar/1` into `foo/bar?step=1`
+        // Convert `foo/bar/1` to `foo/bar?step=1`
         $pagination = preg_replace('#' . $config->index->slug . '/(.*?)/([0-9]+)"#', $config->index->slug . '/$1?' . $ps_config['query'] . '=$2"', $pagination);
 
         // Output the results
@@ -53,7 +53,7 @@ function do_split_page_content($content) {
 
 }
 
-// Apply filters
+// Register the filters
 Filter::add('article:content', 'do_split_page_content', 40);
 Filter::add('page:content', 'do_split_page_content', 40);
 
@@ -80,17 +80,17 @@ if(preg_match('#' . $config->manager->slug . '\/(article|page)\/(ignite|repair)#
  * --------------
  */
 
-Route::accept($config->manager->slug . '/plugin/page-splitter/update', function() use($config, $speak) {
+Route::accept($config->manager->slug . '/plugin/' . basename(__DIR__) . '/update', function() use($config, $speak) {
     if( ! Guardian::happy()) {
         Shield::abort();
     }
     if($request = Request::post()) {
         Guardian::checkToken($request['token']);
-        File::write($request['css'])->saveTo(PLUGIN . DS . 'page-splitter' . DS . 'shell' . DS . 'ps.css');
+        File::write($request['css'])->saveTo(PLUGIN . DS . basename(__DIR__) . DS . 'shell' . DS . 'ps.css');
         unset($request['token']); // Remove token from request array
         unset($request['css']); // Remove CSS from request array
         $request['query'] = Text::parse($request['query'])->to_array_key;
-        File::serialize($request)->saveTo(PLUGIN . DS . 'page-splitter' . DS . 'states' . DS . 'config.txt');
+        File::serialize($request)->saveTo(PLUGIN . DS . basename(__DIR__) . DS . 'states' . DS . 'config.txt');
         Notify::success(Config::speak('notify_success_updated', array($speak->plugin)));
         Guardian::kick(dirname($config->url_current));
     }

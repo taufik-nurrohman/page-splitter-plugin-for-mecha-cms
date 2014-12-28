@@ -1,5 +1,5 @@
 <form class="form-plugin" action="<?php echo $config->url_current; ?>/update" method="post">
-  <input name="token" type="hidden" value="<?php $ps_config = File::open(PLUGIN . DS . 'page-splitter' . DS . 'states' . DS . 'config.txt')->unserialize(); $ps_css = File::open(PLUGIN . DS . 'page-splitter' . DS . 'shell' . DS . 'ps.css')->read(); echo $token; ?>">
+  <input name="token" type="hidden" value="<?php $ps_config = File::open(PLUGIN . DS . basename(__DIR__) . DS . 'states' . DS . 'config.txt')->unserialize(); $ps_css = File::open(PLUGIN . DS . basename(__DIR__) . DS . 'shell' . DS . 'ps.css')->read(); echo $token; ?>">
   <label class="grid-group">
     <span class="grid span-1 form-label"><?php echo $speak->ps_plugin_title_query; ?></span>
     <span class="grid span-5"><input name="query" type="text" class="input-block" value="<?php echo Guardian::wayback('query', $ps_config['query']); ?>"></span>
