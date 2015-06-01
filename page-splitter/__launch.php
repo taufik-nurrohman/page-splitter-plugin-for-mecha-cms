@@ -23,9 +23,6 @@ Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
  */
 
 Route::accept($config->manager->slug . '/plugin/' . basename(__DIR__) . '/update', function() use($config, $speak) {
-    if( ! Guardian::happy()) {
-        Shield::abort();
-    }
     if($request = Request::post()) {
         Guardian::checkToken($request['token']);
         File::write($request['css'])->saveTo(PLUGIN . DS . basename(__DIR__) . DS . 'shell' . DS . 'ps.css');
