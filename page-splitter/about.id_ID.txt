@@ -1,13 +1,13 @@
 Title: Pembagi Halaman
 Author: Taufik Nurrohman
 URL: http://latitudu.com
-Version: 1.0.2
+Version: 1.1.0
 
 ====
 
 > Membagi isi artikel/halaman menjadi potongan-potongan, dan membuatnya dapat dinavigasikan. 
 
-Anda dapat menggunakannya untuk membagi-bagi konten artikel/halaman yang panjang menjadi dua, tiga, empat, atau lebih langkah. Plugin ini juga berguna untuk menangani galeri foto/video/presentasi atau bahkan komik web dengan banyak gambar, sehingga proses memuat sumber daya dapat diantrikan dalam langkah-langkah. 
+Anda dapat menggunakannya untuk membagi-bagi konten artikel/halaman yang panjang menjadi dua, tiga, empat, atau lebih langkah. Plugin ini juga berguna untuk menangani galeri foto/video/presentasi atau bahkan komik web dengan banyak gambar, sehingga proses pemuatan sumber daya dapat diantrekan dalam langkah-langkah. 
 
 Tidak dianjurkan untuk halaman-halaman yang hanya berisi teks saja. Ini mungkin hanya akan membuat pengunjung Anda marah-marah.
 
