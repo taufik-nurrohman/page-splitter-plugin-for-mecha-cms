@@ -44,7 +44,7 @@ function do_split_page_content($content) {
         if(isset($_GET) && is_array($_GET)) {
             unset($_GET[$ps_config['query']]); // Remove duplicate
             foreach($_GET as $k => $v) {
-                $q .= '&amp;' . $k . '=' . $v;
+                $q .= '&amp;' . $k . '=' . Text::parse($v, '->encoded_url');
             }
         }
         // Convert `foo/bar/1` to `foo/bar?step=1`
