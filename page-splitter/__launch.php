@@ -1,20 +1,22 @@
 <?php
 
 // Add quick toolbar icon to the post editor
-Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
-    echo '<script>
-(function(base) {
-    if(typeof base.composer === "undefined") return;
-    base.composer.button(\'files-o\', {
-        \'title\': \'' . Config::speak('ps_plugin_title_split') . '\',
-        \'click\': function(e, editor) {
-            editor.grip.insert(\'\\n\\n<!-- next -->\\n\\n\');
-        },
-        \'position\': 12
-    });
-})(DASHBOARD);
-</script>';
-}, 20);
+if(strpos($config->url_path, $config->manager->slug . '/article/') === 0 || strpos($config->url_path, $config->manager->slug . '/page/') === 0) {
+    Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
+        echo '<script>
+    (function(base) {
+        if(typeof base.composer === "undefined") return;
+        base.composer.button(\'files-o\', {
+            \'title\': \'' . Config::speak('ps_plugin_title_split') . '\',
+            \'click\': function(e, editor) {
+                editor.grip.insert(\'\\n\\n<!-- next -->\\n\\n\');
+            },
+            \'position\': 12
+        });
+    })(DASHBOARD);
+    </script>';
+    }, 20);
+}
 
 
 /**
