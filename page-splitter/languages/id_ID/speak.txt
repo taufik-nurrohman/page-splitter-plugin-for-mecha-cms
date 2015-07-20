@@ -1,7 +1,7 @@
-ps_plugin_title_query: Kueri
-ps_plugin_title_pagination: Navigasi
-ps_plugin_title_appearance: Tampilan
-ps_plugin_title_split: Potong Halaman
+plugin_page_splitter_title_query: Kueri
+plugin_page_splitter_title_pagination: Navigasi
+plugin_page_splitter_title_appearance: Tampilan
+plugin_page_splitter_title_split: Potong Halaman
 
-ps_plugin_title_pagination_next_prev: Berikutnya/Sebelumnya
-ps_plugin_title_pagination_step: Langkah
+plugin_page_splitter_title_pagination_next_prev: Berikutnya/Sebelumnya
+plugin_page_splitter_title_pagination_step: Langkah

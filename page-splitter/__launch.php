@@ -1,20 +1,20 @@
 <?php
 
-// Add quick toolbar icon to the post editor
-if(strpos($config->url_path, $config->manager->slug . '/article/') === 0 || strpos($config->url_path, $config->manager->slug . '/page/') === 0) {
+
+/**
+ * Editor Toolbar
+ * --------------
+ */
+
+$route_ = $config->manager->slug . '/(article|page)/';
+
+Config::merge('DASHBOARD.languages.MTE', array(
+    'plugin_page_splitter_title_split' => Config::speak('plugin_page_splitter_title_split')
+));
+
+if(Route::is($route_ . 'ignite') || Route::is($route_ . 'repair/id:(:num)')) {
     Weapon::add('SHIPMENT_REGION_BOTTOM', function() {
-        echo '<script>
-    (function(base) {
-        if(typeof base.composer === "undefined") return;
-        base.composer.button(\'files-o\', {
-            \'title\': \'' . Config::speak('ps_plugin_title_split') . '\',
-            \'click\': function(e, editor) {
-                editor.grip.insert(\'\\n\\n<!-- next -->\\n\\n\');
-            },
-            \'position\': 12
-        });
-    })(DASHBOARD);
-    </script>';
+        echo Asset::javascript('cabinet/plugins/' . File::B(__DIR__) . '/assets/sword/button.js');
     }, 20);
 }
 
@@ -24,15 +24,15 @@ if(strpos($config->url_path, $config->manager->slug . '/article/') === 0 || strp
  * --------------
  */
 
-Route::accept($config->manager->slug . '/plugin/' . basename(__DIR__) . '/update', function() use($config, $speak) {
+Route::accept($config->manager->slug . '/plugin/' . File::B(__DIR__) . '/update', function() use($config, $speak) {
     if($request = Request::post()) {
         Guardian::checkToken($request['token']);
-        File::write($request['css'])->saveTo(PLUGIN . DS . basename(__DIR__) . DS . 'shell' . DS . 'ps.css');
+        File::write($request['css'])->saveTo(PLUGIN . DS . File::B(__DIR__) . DS . 'assets' . DS . 'shell' . DS . 'ps.css');
         unset($request['token']); // Remove token from request array
         unset($request['css']); // Remove CSS from request array
         $request['query'] = Text::parse($request['query'], '->array_key');
-        File::serialize($request)->saveTo(PLUGIN . DS . basename(__DIR__) . DS . 'states' . DS . 'config.txt', 0600);
+        File::serialize($request)->saveTo(PLUGIN . DS . File::B(__DIR__) . DS . 'states' . DS . 'config.txt', 0600);
         Notify::success(Config::speak('notify_success_updated', $speak->plugin));
-        Guardian::kick(dirname($config->url_current));
+        Guardian::kick(File::D($config->url_current));
     }
 });
