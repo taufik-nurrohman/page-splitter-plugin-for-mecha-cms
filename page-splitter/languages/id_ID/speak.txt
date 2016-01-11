@@ -1,7 +1,8 @@
 plugin_page_splitter_title_query: Kueri
 plugin_page_splitter_title_pagination: Navigasi
-plugin_page_splitter_title_appearance: Tampilan
+plugin_page_splitter_title_css: Tampilan
 plugin_page_splitter_title_split: Potong Halaman
 
-plugin_page_splitter_title_pagination_next_prev: Berikutnya/Sebelumnya
-plugin_page_splitter_title_pagination_step: Langkah
+plugin_page_splitter_title_pager:
+  1: Berikutnya/Sebelumnya
+  2: Langkah

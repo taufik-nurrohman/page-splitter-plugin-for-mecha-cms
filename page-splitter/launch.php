@@ -1,55 +1,48 @@
 <?php
 
 // Load the configuration file
-$ps_config = File::open(PLUGIN . DS . File::B(__DIR__) . DS . 'states' . DS . 'config.txt')->unserialize();
-
-// Include the Page Splitter's CSS
-Weapon::add('shell_after', function() {
-    echo Asset::stylesheet('cabinet/plugins/' . File::B(__DIR__) . '/assets/shell/ps.css');
-});
+$page_splitter_config = File::open(__DIR__ . DS . 'states' . DS . 'config.txt')->unserialize();
 
 // The page splitter function
-function do_split_page_content($content) {
-    global $config, $speak, $ps_config; 
-    // Do nothing if the minimum required pattern not found in page content
+function do_page_splitter($content) {
+    global $config, $speak, $page_splitter_config; 
+    // Do nothing if the minimum required pattern wasn't found in page content
     if(strpos($content, '<!-- next -->') === false) return $content;
-    // Add a closing pattern if the closing pattern not found
-    if(strpos($content, '<!-- end:steps -->') === false) {
-        $content .= "\n\n" . '<!-- end:steps -->';
+    // Add a closing pattern if the closing pattern wasn't found
+    if(strpos($content, '<!-- end:step -->') === false) {
+        $content .= "\n\n" . '<!-- end:step -->';
     }
-    // Paginate the whole page content if the opening and closing pattern not found
-    if(strpos($content, '<!-- begin:steps -->') === false) {
-        $content = '<!-- begin:steps -->' . "\n\n" . $content . "\n\n" . '<!-- end:steps -->';
+    // Paginate the whole page content if the opening and closing pattern wasn't found
+    if(strpos($content, '<!-- begin:step -->') === false) {
+        $content = '<!-- begin:step -->' . "\n\n" . $content . "\n\n" . '<!-- end:step -->';
     }
     // Parse the page content
-    $content = preg_replace_callback('#<\!\-\- begin\:steps \-\->([\s\S]+)<\!\-\- end\:steps \-\->#', function($matches) use($config, $speak, $ps_config) {
-        // Create the page content parts
+    $content = preg_replace_callback('#<\!\-\- begin\:steps? \-\->([\s\S]+)<\!\-\- end\:steps? \-\->#', function($matches) use($config, $speak, $page_splitter_config) {
+        // Create the page content part(s)
         $parts = explode('<!-- next -->', trim($matches[1]));
         // Define page offset
-        $offset = Request::get($ps_config['query'], 1);
-        // Remove `?step=%s` query string URL duplicate
-        unset($_GET[$ps_config['query']]);
-        // Re-build query string URL
-        $q = array();
-        foreach($_GET as $k => $v) {
-            $q[] = $k . '=' . Text::parse($v, '->encoded_url');
-        }
-        $config->url_query = ! empty($q) ? '?' . implode('&', $q) : "";
+        $offset = Request::get($page_splitter_config['query'], 1);
+        // Remove query string duplicate
+        $config->url_query = HTTP::query($page_splitter_config['query'], false);
         Config::set('url_query', $config->url_query);
-        unset($q);
-        // Generate query string URL-based pagination links
-        $pager = Navigator::extract($parts, $offset, 1, '/' . $config->url_path . '?' . $ps_config['query'] . '=%s');
-        $pager_next_prev = ( ! empty($pager->prev->link) ? '<a class="ps-pager-prev" href="' . $pager->prev->url . '">' . $speak->prev . '</a>' : '<span class="ps-pager-prev">' . $speak->prev . '</span>') . ( ! empty($pager->next->link) ? '<a class="ps-pager-next" href="' . $pager->next->url . '">' . $speak->next . '</a>' : '<span class="ps-pager-next">' . $speak->next . '</span>');
-        $pagination = $ps_config['pagination'] === 'step' ? $pager->step->link : $pager_next_prev;
-        // Output the results
+        // Generate query string URL-based pagination link(s)
+        $pager = Navigator::extract($parts, $offset, 1, '/' . $config->url_path . '?' . $page_splitter_config['query'] . '=%s');
+        $pager_next_prev = ( ! empty($pager->prev->anchor) ? '<a class="ps-pager-prev" href="' . $pager->prev->url . '">' . $speak->prev . '</a>' : '<span class="ps-pager-prev">' . $speak->prev . '</span>') . ( ! empty($pager->next->anchor) ? '<a class="ps-pager-next" href="' . $pager->next->url . '">' . $speak->next . '</a>' : '<span class="ps-pager-next">' . $speak->next . '</span>');
+        $pager = $page_splitter_config['pager'] === 2 ? $pager->step->html : $pager_next_prev;
+        // Output the result(s)
         $output = isset($parts[$offset - 1]) ? $parts[$offset - 1] : $speak->notify_error_not_found;
         unset($parts);
-        return '<div class="ps-area cl cf p"><div class="ps-step-' . $offset . '">' . $output . '</div><nav class="ps-pager cl cf p">' . $pagination . '</nav></div>';
+        return '<div class="ps-area cl cf p"><div class="ps-step ps-step-' . $offset . '" id="ps-step-' . $offset . '">' . $output . '</div><nav class="ps-pager cl cf p">' . $pager . '</nav></div>';
     }, $content);
-    // Output the results
+    // Output the result(s)
     return $content;
 }
 
-// Register the filters
-Filter::add('article:content', 'do_split_page_content', 40);
-Filter::add('page:content', 'do_split_page_content', 40);
+if(Mecha::walk(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR))->has(POST . DS . $config->page_type)) {
+    // Register the `do_page_splitter` filter ...
+    Filter::add($config->page_type . ':content', 'do_page_splitter', 9); // filter stack value should be less than the TOC plugin's filter stack value
+    // Include the Page Splitter's CSS
+    Weapon::add('shell_after', function() {
+        echo Asset::stylesheet(__DIR__ . DS . 'assets' . DS . 'shell' . DS . 'page-splitter.css');
+    });
+}

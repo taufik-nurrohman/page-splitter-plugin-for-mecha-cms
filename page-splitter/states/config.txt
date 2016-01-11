@@ -1,1 +1,1 @@
-a:2:{s:5:"query";s:4:"step";s:10:"pagination";s:9:"next/prev";}
+a:2:{s:5:"query";s:4:"step";s:5:"pager";i:1;}
