@@ -38,7 +38,7 @@ function do_page_splitter($content) {
     return $content;
 }
 
-if(Mecha::walk(glob(POST . DS . '*', GLOB_NOSORT | GLOB_ONLYDIR))->has(POST . DS . $config->page_type)) {
+if($config->is->post) {
     // Register the `do_page_splitter` filter ...
     Filter::add($config->page_type . ':content', 'do_page_splitter', 9); // filter stack value should be less than the TOC plugin's filter stack value
     // Include the Page Splitter's CSS
