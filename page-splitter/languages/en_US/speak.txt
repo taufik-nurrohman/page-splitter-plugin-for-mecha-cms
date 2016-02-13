@@ -1,8 +1,9 @@
-plugin_page_splitter_title_query: Query
-plugin_page_splitter_title_pagination: Pagination
-plugin_page_splitter_title_css: Appearance
-plugin_page_splitter_title_split: Split Page
-
-plugin_page_splitter_title_pager:
-  1: Next/Previous
-  2: Step
+plugin_page_splitter:
+  title:
+    query: Query
+    pager:
+      1: Next/Previous
+      2: Step
+    pagination: Pagination
+    css: Appearance
+    split: Split Page

@@ -1,8 +1,9 @@
-plugin_page_splitter_title_query: Kueri
-plugin_page_splitter_title_pagination: Navigasi
-plugin_page_splitter_title_css: Tampilan
-plugin_page_splitter_title_split: Potong Halaman
-
-plugin_page_splitter_title_pager:
-  1: Berikutnya/Sebelumnya
-  2: Langkah
+plugin_page_splitter:
+  title:
+    query: Kueri
+    pager:
+      1: Berikutnya/Sebelumnya
+      2: Langkah
+    pagination: Navigasi
+    css: Tampilan
+    split: Potong Halaman

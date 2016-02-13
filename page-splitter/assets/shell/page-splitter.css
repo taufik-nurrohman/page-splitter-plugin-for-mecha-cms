@@ -3,15 +3,15 @@
  * --------------------
  */
 
-.ps-pager {text-align:center}
+.page-splitter-pager {text-align:center}
 
-.ps-pager a.ps-pager-prev,
-.ps-pager a.ps-pager-next,
-.ps-pager span.ps-pager-prev,
-.ps-pager span.ps-pager-next,
-.ps-pager .pagination a,
-.ps-pager .pagination span,
-.ps-pager .pagination strong {
+.page-splitter-pager a.page-splitter-pager-prev,
+.page-splitter-pager a.page-splitter-pager-next,
+.page-splitter-pager span.page-splitter-pager-prev,
+.page-splitter-pager span.page-splitter-pager-next,
+.page-splitter-pager .pagination a,
+.page-splitter-pager .pagination span,
+.page-splitter-pager .pagination strong {
   display:inline-block;
   line-height:inherit;
   text-decoration:none;
@@ -21,33 +21,33 @@
   cursor:pointer;
 }
 
-.ps-pager a.ps-pager-prev,
-.ps-pager a.ps-pager-next,
-.ps-pager .pagination a {background-color:#333}
+.page-splitter-pager a.page-splitter-pager-prev,
+.page-splitter-pager a.page-splitter-pager-next,
+.page-splitter-pager .pagination a {background-color:#333}
 
-.ps-pager a.ps-pager-prev:focus,
-.ps-pager a.ps-pager-next:focus,
-.ps-pager a.ps-pager-prev:hover,
-.ps-pager a.ps-pager-next:hover,
-.ps-pager .pagination a:focus,
-.ps-pager .pagination a:hover {
+.page-splitter-pager a.page-splitter-pager-prev:focus,
+.page-splitter-pager a.page-splitter-pager-next:focus,
+.page-splitter-pager a.page-splitter-pager-prev:hover,
+.page-splitter-pager a.page-splitter-pager-next:hover,
+.page-splitter-pager .pagination a:focus,
+.page-splitter-pager .pagination a:hover {
   background-color:#F00;
   text-decoration:none;
 }
 
-.ps-pager a.ps-pager-prev:active,
-.ps-pager a.ps-pager-next:active,
-.ps-pager .pagination a:active {
+.page-splitter-pager a.page-splitter-pager-prev:active,
+.page-splitter-pager a.page-splitter-pager-next:active,
+.page-splitter-pager .pagination a:active {
   background-color:#8B0000;
   text-decoration:none;
 }
 
-.ps-pager span.ps-pager-prev,
-.ps-pager span.ps-pager-next,
-.ps-pager .pagination span,
-.ps-pager .pagination strong {
+.page-splitter-pager span.page-splitter-pager-prev,
+.page-splitter-pager span.page-splitter-pager-next,
+.page-splitter-pager .pagination span,
+.page-splitter-pager .pagination strong {
   cursor:default;
   cursor:not-allowed;
 }
 
-.ps-pager .pagination span a {cursor:pointer}
+.page-splitter-pager .pagination span a {cursor:pointer}
